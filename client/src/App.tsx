@@ -5,6 +5,7 @@ import OrganizerRoutes from "./routes/OrganizerRoutes";
 import UserRoutes from "./routes/UserRoutes";
 import LandingPage from "./pages/common/LandingPage";
 import { NoAuthRoute } from "./utils/protected/PublicRoute";
+import NotFoundPage from "./pages/common/NotFound";
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 				<Route path="/org/*" element={<OrganizerRoutes />} />
 
 				<Route path="/unauthorized" element={<UnauthorizedPage />} />
+				<Route path="*" element={<NotFoundPage />} />
 			</Routes>
 		</Router>
 	);

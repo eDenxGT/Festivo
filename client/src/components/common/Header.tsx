@@ -76,12 +76,12 @@ export function Header({
 								variant="ghost"
 								asChild
 								className="text-foreground/80 hover:text-primary">
-								<Link to={`/${role}/signin`}>Sign In</Link>
+								<Link to={`/${role === "organizer" ? "org" : role}/signin`}>Sign In</Link>
 							</Button>
 							<Button
 								asChild
 								className="bg-primary text-primary-foreground hover:bg-primary/90">
-								<Link to={`/${role}/signup`}>Sign Up</Link>
+								<Link to={`/${role === "organizer" ? "org" : role}/signup`}>Sign Up</Link>
 							</Button>
 						</>
 					)}
@@ -138,14 +138,14 @@ export function Header({
 										variant="ghost"
 										asChild
 										className="justify-start text-foreground/80 hover:text-primary">
-										<Link to={`/${role}/signin`}>
+										<Link to={`/${role === "organizer" ? "org" : role}/signin`}>
 											Sign In
 										</Link>
 									</Button>
 									<Button
 										asChild
 										className="bg-primary text-primary-foreground hover:bg-primary/90">
-										<Link to={`/${role}/signup`}>
+										<Link to={`/${role === "organizer" ? "org" : role}/signup`}>
 											Sign Up
 										</Link>
 									</Button>

@@ -1,8 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { Calendar, Ticket, User } from "lucide-react";
+import type { User as UserType } from "@/types/UserTypes";
 
 export default function HomeComponent() {
+	const session: UserType = useOutletContext();
+
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/5">
 			<main className="container mx-auto px-4 pt-24 pb-12">
@@ -11,7 +14,7 @@ export default function HomeComponent() {
 					<div className="flex items-center justify-center gap-3 mb-4">
 						<div className="text-left">
 							<h1 className="text-2xl font-bold text-foreground">
-								Welcome back, John!
+								Welcome back, {session.name}!
 							</h1>
 							<p className="text-muted-foreground">
 								Discover amazing events happening around you

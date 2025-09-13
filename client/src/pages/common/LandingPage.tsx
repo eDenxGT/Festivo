@@ -33,11 +33,9 @@ export default function LandingPage() {
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Button
 							size="lg"
-							asChild
 							className="bg-primary text-primary-foreground hover:bg-primary/90">
 							<Link to="/user/signup">
-								Start Exploring Events{" "}
-								<ArrowRight className="ml-2 h-4 w-4" />
+								Start Exploring Events
 							</Link>
 						</Button>
 						<Button size="lg" variant="outline">

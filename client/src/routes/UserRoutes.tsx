@@ -6,6 +6,7 @@ import { UserLayout } from "@/components/layouts/UserLayout";
 import UserSignInPage from "@/pages/user/UserSignInPage";
 import UserSignUpPage from "@/pages/user/UserSignUpPage";
 import UserHomePage from "@/pages/user/UserHomePage";
+import NotFoundPage from "@/pages/common/NotFound";
 
 const UserRoutes = () => {
 	return (
@@ -30,7 +31,7 @@ const UserRoutes = () => {
 					/>
 				}>
 				<Route path="/home" element={<UserHomePage />} />
-				{/* <Route path="*" element={<NotFoundPage />} /> */}
+				<Route path="*" element={<NotFoundPage />} />
 			</Route>
 		</Routes>
 	);

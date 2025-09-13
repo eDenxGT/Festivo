@@ -6,6 +6,7 @@ import { ProtectedRoute } from "@/utils/protected/ProtectedRoute";
 import SignInPage from "@/pages/organizer/OrganizerSignInPage";
 import SignUpPage from "@/pages/organizer/OrganizerSignUpPage";
 import OrganizerDashboard from "@/pages/organizer/OrganizerDashboard";
+import NotFoundPage from "@/pages/common/NotFound";
 
 const OrganizerRoutes = () => {
 	return (
@@ -29,8 +30,8 @@ const OrganizerRoutes = () => {
 					/>
 				}>
 				<Route path="/dashboard" element={<OrganizerDashboard />} />
-				{/* <Route path="*" element={<NotFoundPage />} /> */}
 			</Route>
+			<Route path="*" element={<NotFoundPage />} />
 		</Routes>
 	);
 };

@@ -10,7 +10,7 @@ export const errorHandler = (
   res: Response,
   _next: NextFunction
 ) => {
-  console.log(err);
+  // console.log(err);
   if (err instanceof AppError) {
     logger.error(err.message, err.details);
 

@@ -1,6 +1,7 @@
-import envConfig from '../../shared/config';
-import { HTTP_STATUS } from '../../shared/constants';
+import { authController } from '../../infrastructure/di/resolver';
+import { decodeToken, verifyAuth } from '../middlewares/auth.middleware';
 import { BaseRoute } from './base/base.route';
+import asyncHandler from 'express-async-handler';
 
 export class PrivateRoutes extends BaseRoute {
   constructor() {
@@ -9,8 +10,25 @@ export class PrivateRoutes extends BaseRoute {
 
   protected initializeRoutes(): void {
     //* ─────────────────────────────────────────────────────────────
-    //*                   🛠️ Details Endpoints
+    //*                    🛠️ User Endpoints
     //* ─────────────────────────────────────────────────────────────
-    this.router.get('/', (req, res) => res.status(200).json({ message: 'OK' }));
+    this.router.post(
+      '/user/logout',
+      verifyAuth,
+      asyncHandler(authController.logoutUser)
+    );
+
+    //* ─────────────────────────────────────────────────────────────
+    //*                    🛠️ User Endpoints
+    //* ─────────────────────────────────────────────────────────────
+
+    //* ─────────────────────────────────────────────────────────────
+    //*                🛠️ Token Refreshing Endpoint
+    //* ─────────────────────────────────────────────────────────────
+    this.router.post(
+      '/refresh-token',
+      decodeToken,
+      authController.handleTokenRefresh
+    );
   }
 }

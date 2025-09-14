@@ -78,7 +78,6 @@ export class AuthController {
   };
 
   logoutUser = async (req: Request, res: Response) => {
-    const user = (req as CustomRequest).user;
     clearAuthCookies(res);
     handleSuccessResponse(res, HTTP_STATUS.OK, SUCCESS_MESSAGES.LOGOUT_SUCCESS);
   };

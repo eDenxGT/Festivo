@@ -1,5 +1,5 @@
 import mongoose, { Document, ObjectId, Schema } from 'mongoose';
-import { IEvent } from '../../../../domain/entities/event.entity';
+import { IEvent } from '../../domain/entities/event.entity';
 
 export interface IEventModel extends Omit<IEvent, 'id'>, Document {
   _id: ObjectId;

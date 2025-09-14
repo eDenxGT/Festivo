@@ -1,5 +1,5 @@
 import mongoose, { ObjectId, Schema } from 'mongoose';
-import { IRegistration } from '../../../../domain/entities/registration.entity';
+import { IRegistration } from '../../domain/entities/registration.entity';
 
 export interface IRegistrationModel
   extends Omit<IRegistration, 'id'>,

@@ -11,7 +11,9 @@ export const ERROR_MESSAGES = {
     NOT_FOUND: 'The requested resource was not found.',
     FORBIDDEN: "Forbidden. You don't have permission to access this resource.",
     UNAUTHORIZED: 'Unauthorized access. Please log in.',
-    
+
+    INVALID_PRICE: 'Please enter a price.',
+
     TOKEN_EXPIRED: 'Token Expired. Please log in',
     INVALID_TOKEN: 'Invalid Token',
 

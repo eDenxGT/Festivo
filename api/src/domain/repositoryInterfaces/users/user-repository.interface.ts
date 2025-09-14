@@ -1,5 +1,4 @@
-import { IUserModel } from '../../../infrastructure/database/mongoDb/models/user.model';
-import { IUser } from '../../entities/user.entity';
+import { IUserModel } from '../../../infrastructure/models/user.model';
 import { IBaseRepository } from '../base-repository.interface';
 
 export interface IUserRepository extends IBaseRepository<IUserModel> {}

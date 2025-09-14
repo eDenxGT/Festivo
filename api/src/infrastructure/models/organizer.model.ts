@@ -1,5 +1,5 @@
 import mongoose, { Document, ObjectId, Schema } from 'mongoose';
-import { IOrganizer } from '../../../../domain/entities/organizer.entity';
+import { IOrganizer } from '../../domain/entities/organizer.entity';
 
 export interface IOrganizerModel extends Omit<IOrganizer, 'id'>, Document {
   _id: ObjectId;

@@ -1,4 +1,4 @@
-import { signUp } from "@/services/auth/auth.service";
+import { signUp } from "@/services/auth.service";
 import type { IAxiosResponse } from "@/types/Response";
 import type { IRegisterData } from "@/types/UserTypes";
 import { useMutation } from "@tanstack/react-query";

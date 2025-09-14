@@ -26,6 +26,8 @@ export class ExpressServer {
   constructor() {
     this._app = express();
 
+    logger.log('Starting Server...');
+
     this.configureMiddlewares();
     this.configureRoutes();
     this.configureErrorHandling();

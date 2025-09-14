@@ -8,6 +8,8 @@ import { ISignInUserUseCase } from '../../domain/usecaseInterfaces/auth/signin-u
 import { SignInUserUseCase } from '../../application/usecases/auth/signin-user.usecase';
 import { IRefreshTokenUseCase } from '../../domain/usecaseInterfaces/auth/refresh-token-usecase.interface';
 import { RefreshTokenUseCase } from '../../application/usecases/auth/refresh-token.usecase';
+import { ICreateEventUseCase } from '../../domain/usecaseInterfaces/event/create-event-usecase.interface';
+import { CreateEventUseCase } from '../../application/usecases/event/create-event.usecase';
 
 export class UseCaseRegistry {
   static registerUseCases(): void {
@@ -19,6 +21,9 @@ export class UseCaseRegistry {
     });
     container.register<IRefreshTokenUseCase>('IRefreshTokenUseCase', {
       useClass: RefreshTokenUseCase
+    });
+    container.register<ICreateEventUseCase>('ICreateEventUseCase', {
+      useClass: CreateEventUseCase
     });
   }
 }

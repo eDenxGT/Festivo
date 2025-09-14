@@ -13,7 +13,7 @@ import {
 import { Header } from "../common/Header";
 import { useState } from "react";
 import { useFormik } from "formik";
-import { signUpSchema } from "@/utils/validations/signup.validator";
+import { signUpSchema } from "@/utils/validations/auth/signup.validator";
 import type { UserRole } from "@/types/UserTypes";
 import { Link } from "react-router";
 

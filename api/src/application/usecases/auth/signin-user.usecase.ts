@@ -11,9 +11,9 @@ import { IJwtService } from '../../../domain/serviceInterfaces/jwt-service.inter
 import { UserDTO } from '../../dtos/user/output/user.dto';
 import { OrganizerDTO } from '../../dtos/organizer/output/organizer.dto';
 import { OrganizerMapper } from '../../../shared/mappers/organizer/organizer.mapper';
-import { IOrganizerModel } from '../../../infrastructure/database/mongoDb/models/organizer.model';
 import { UserMapper } from '../../../shared/mappers/user/user.mapper';
-import { IUserModel } from '../../../infrastructure/database/mongoDb/models/user.model';
+import { IOrganizerModel } from '../../../infrastructure/models/organizer.model';
+import { IUserModel } from '../../../infrastructure/models/user.model';
 
 export type SignInResponseDTO = {
   accessToken: string;

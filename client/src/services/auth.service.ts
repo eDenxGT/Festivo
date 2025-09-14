@@ -14,7 +14,7 @@ export const signUp = async (data: IRegisterData): Promise<IAxiosResponse> => {
 };
 
 export const logoutUser = async (): Promise<IAxiosResponse> => {
-	const res = await pvtAxiosInstance.post("/user/logout");
+	const res = await pvtAxiosInstance.post("/logout");
 	return res.data;
 };
 

@@ -1,7 +1,7 @@
 import { injectable } from 'tsyringe';
-import { IOrganizerRepository } from '../../../../../domain/repositoryInterfaces/users/organizer-repository.interface';
 import { BaseRepository } from '../base.repository';
 import { IOrganizerModel, OrganizerModel } from '../../models/organizer.model';
+import { IOrganizerRepository } from '../../../domain/repositoryInterfaces/users/organizer-repository.interface';
 
 @injectable()
 export class OrganizerRepository

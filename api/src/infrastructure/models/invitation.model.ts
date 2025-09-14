@@ -1,5 +1,5 @@
 import mongoose, { Document, ObjectId, Schema } from 'mongoose';
-import { IInvitation } from '../../../../domain/entities/invitation.entity';
+import { IInvitation } from '../../domain/entities/invitation.entity';
 
 export interface IInvitationModel extends Omit<IInvitation, 'id'>, Document {
   _id: ObjectId;

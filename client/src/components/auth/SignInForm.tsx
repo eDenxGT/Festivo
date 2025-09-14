@@ -15,7 +15,7 @@ import {
 } from "../ui/card";
 import { Checkbox } from "../ui/checkbox";
 import { Separator } from "../ui/separator";
-import { signinSchema } from "@/utils/validations/signin.validator";
+import { signinSchema } from "@/utils/validations/auth/signin.validator";
 
 interface ISignInPageProps {
 	onSubmit: ({

@@ -4,11 +4,12 @@ import { Outlet, useNavigate } from "react-router";
 import { useToaster } from "@/hooks/ui/useToaster";
 import { useLogout } from "@/hooks/auth/useLogout";
 import { organizerLogout } from "@/store/slices/organizer.slice";
-import { logoutUser } from "@/services/auth/auth.service";
+import { logoutUser } from "@/services//auth.service";
 import { Header } from "../common/Header";
 
 export const OrganizerLayout = () => {
 	const { successToast, errorToast } = useToaster();
+
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
@@ -34,7 +35,7 @@ export const OrganizerLayout = () => {
 		<div className="flex flex-col min-h-screen">
 			{/* Header */}
 			<Header role="organizer" isLogged handleLogout={handleLogout} />
-			{/* Main content */}
+			{/* Main content  */}
 			<Outlet context={organizer} />
 		</div>
 	);

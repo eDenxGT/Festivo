@@ -1,6 +1,6 @@
 import { OrganizerDTO } from '../../../application/dtos/organizer/output/organizer.dto';
 import { IOrganizer } from '../../../domain/entities/organizer.entity';
-import { IOrganizerModel } from '../../../infrastructure/database/mongoDb/models/organizer.model';
+import { IOrganizerModel } from '../../../infrastructure/models/organizer.model';
 import { IBaseMapper } from '../base-mapper.interface';
 
 export class OrganizerMapper

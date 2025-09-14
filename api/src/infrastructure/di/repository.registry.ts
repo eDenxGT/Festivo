@@ -1,9 +1,11 @@
 //* ====== Module Imports ====== *//
 import { container } from 'tsyringe';
 import { IUserRepository } from '../../domain/repositoryInterfaces/users/user-repository.interface';
-import { UserRepository } from '../database/mongoDb/repositories/users/user.repository';
 import { IOrganizerRepository } from '../../domain/repositoryInterfaces/users/organizer-repository.interface';
-import { OrganizerRepository } from '../database/mongoDb/repositories/users/organizer.repository';
+import { OrganizerRepository } from '../repositories/users/organizer.repository';
+import { UserRepository } from '../repositories/users/user.repository';
+import { IEventRepository } from '../../domain/repositoryInterfaces/event/event-repository.interface';
+import { EventRepository } from '../repositories/event/event.repository';
 
 //* ====== Repository Imports ====== *//
 
@@ -14,6 +16,9 @@ export class RepositoryRegistry {
     });
     container.register<IOrganizerRepository>('IOrganizerRepository', {
       useClass: OrganizerRepository
+    });
+    container.register<IEventRepository>('IEventRepository', {
+      useClass: EventRepository
     });
   }
 }

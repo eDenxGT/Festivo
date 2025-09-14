@@ -1,6 +1,6 @@
 import { UserDTO } from '../../../application/dtos/user/output/user.dto';
 import { IUser } from '../../../domain/entities/user.entity';
-import { IUserModel } from '../../../infrastructure/database/mongoDb/models/user.model';
+import { IUserModel } from '../../../infrastructure/models/user.model';
 import { IBaseMapper } from '../base-mapper.interface';
 
 export class UserMapper implements IBaseMapper<IUser, unknown, UserDTO> {

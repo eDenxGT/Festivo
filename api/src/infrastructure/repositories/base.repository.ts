@@ -1,5 +1,5 @@
 import { Model, FilterQuery } from 'mongoose';
-import { IBaseRepository } from '../../../../domain/repositoryInterfaces/base-repository.interface';
+import { IBaseRepository } from '../../domain/repositoryInterfaces/base-repository.interface';
 
 export class BaseRepository<T> implements IBaseRepository<T> {
   constructor(protected model: Model<T>) {}

@@ -23,8 +23,34 @@ export class EmailService implements IEmailService {
     to: string;
     subject: string;
     html: string;
+    attachments?: { filename: string; content: Buffer; cid: string }[];
   }): Promise<void> {
     const info = await this._transporter.sendMail(mailOptions);
     logger.log(`📧 Email sent:` + info.response);
+  }
+
+  async sendInvitationMail(mailOptions: {
+    to: string;
+    subject: string;
+    html: string;
+    qrBase64: string;
+  }): Promise<void> {
+    const attachments = mailOptions.qrBase64
+      ? [
+          {
+            filename: 'qrcode.png',
+            content: Buffer.from(mailOptions.qrBase64, 'base64'),
+            cid: 'qrcode'
+          }
+        ]
+      : undefined;
+
+    await this._sendMail({
+      from: `"Festivo" <${envConfig.nodemailer.EMAIL_USER}>`,
+      to: mailOptions.to,
+      subject: mailOptions.subject,
+      html: mailOptions.html,
+      attachments
+    });
   }
 }

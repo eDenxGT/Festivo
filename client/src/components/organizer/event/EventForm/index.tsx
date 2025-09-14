@@ -21,7 +21,7 @@ import { useCreateEventForm } from "@/hooks/events/forms/useCreateEventForm";
 import { useToaster } from "@/hooks/ui/useToaster";
 
 export default function EventForm() {
-	const { formik, isLoading, addEmail } = useCreateEventForm();
+	const { formik, isLoading, addPerson } = useCreateEventForm();
 
 	const { errorToast } = useToaster();
 
@@ -72,14 +72,14 @@ export default function EventForm() {
 
 								{/* Guest Invitations */}
 								<GuestInvitationForm
-									addEmail={addEmail}
+									addPerson={addPerson}
 									formik={formik}
 								/>
 
 								<Separator />
 
 								<JudgesInvitationForm
-									addEmail={addEmail}
+									addPerson={addPerson}
 									formik={formik}
 								/>
 

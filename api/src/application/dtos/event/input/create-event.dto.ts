@@ -29,6 +29,14 @@ class FoodOptionsDTO {
   evening?: boolean;
 }
 
+export class SpecialParticipantDto {
+  @IsNotEmpty()
+  name!: string;
+
+  @IsEmail()
+  email!: string;
+}
+
 export class CreateEventDTO {
   @IsString()
   @IsNotEmpty()
@@ -86,11 +94,13 @@ export class CreateEventDTO {
 
   @IsOptional()
   @IsArray()
-  @IsEmail({}, { each: true })
-  guest_emails?: string[];
+  @ValidateNested({ each: true })
+  @Type(() => SpecialParticipantDto)
+  guests?: SpecialParticipantDto[];
 
   @IsOptional()
   @IsArray()
-  @IsEmail({}, { each: true })
-  judges_emails?: string[];
+  @ValidateNested({ each: true })
+  @Type(() => SpecialParticipantDto)
+  judges?: SpecialParticipantDto[];
 }

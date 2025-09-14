@@ -18,8 +18,8 @@ export interface EventFormValues {
 		evening: boolean;
 	};
 	max_tickets: number;
-	guest_emails: string[];
-	judges_emails: string[];
+	guests: { name: string; email: string }[];
+	judges: { name: string; email: string }[];
 }
 
 const initialValues: EventFormValues = {
@@ -37,11 +37,11 @@ const initialValues: EventFormValues = {
 		evening: false,
 	},
 	max_tickets: 100,
-	guest_emails: [],
-	judges_emails: [],
+	guests: [],
+	judges: [],
 };
 
-export type MailTypes = "guest_emails" | "judges_emails";
+export type MailTypes = "guests" | "judges";
 
 export const useCreateEventForm = () => {
 	const { mutate, isPending, isError } = useCreateEventMutation();
@@ -63,34 +63,49 @@ export const useCreateEventForm = () => {
 		},
 	});
 
-	const addEmail = (email: string, field: MailTypes) => {
-		if (!email) {
+	const addPerson = (
+		person: { name: string; email: string },
+		field: "guests" | "judges"
+	) => {
+		if (!person.name) {
+			errorToast("Please enter a name");
+			return;
+		}
+
+		if (!person.email) {
 			errorToast("Please enter an email");
 			return;
 		}
 
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		if (!emailRegex.test(email)) {
+		if (!emailRegex.test(person.email)) {
 			errorToast("Invalid email format");
 			return;
 		}
 
-		if (formik.values.guest_emails.includes(email)) {
-			errorToast("This email is already added as a guest");
+		// check duplicates inside same field
+		if (formik.values[field].some((p) => p.email === person.email)) {
+			errorToast(
+				`This email is already added as a ${field.slice(0, -1)}`
+			);
 			return;
 		}
 
-		if (formik.values.judges_emails.includes(email)) {
-			errorToast("This email is already added as a judge");
+		// check if exists in the other field
+		const otherField = field === "guests" ? "judges" : "guests";
+		if (formik.values[otherField].some((p) => p.email === person.email)) {
+			errorToast(
+				`This email is already added as a ${otherField.slice(0, -1)}`
+			);
 			return;
 		}
 
-		formik.setFieldValue(field, [...formik.values[field], email]);
+		formik.setFieldValue(field, [...formik.values[field], person]);
 	};
 
 	return {
 		formik,
 		isLoading: isPending && !isError,
-		addEmail,
+		addPerson,
 	};
 };

@@ -10,6 +10,10 @@ import { IRefreshTokenUseCase } from '../../domain/usecaseInterfaces/auth/refres
 import { RefreshTokenUseCase } from '../../application/usecases/auth/refresh-token.usecase';
 import { ICreateEventUseCase } from '../../domain/usecaseInterfaces/event/create-event-usecase.interface';
 import { CreateEventUseCase } from '../../application/usecases/event/create-event.usecase';
+import { SendEventInvitationUseCase } from '../../application/usecases/event/send-event-invitation.usecase';
+import { ISendEventInvitationUseCase } from '../../domain/usecaseInterfaces/event/send-event-invitation-usecase.interface';
+import { EventRegistrationUseCase } from '../../application/usecases/event/event-registration.usecase';
+import { IEventRegistrationUseCase } from '../../domain/usecaseInterfaces/event/event-registration-usecase.interface';
 
 export class UseCaseRegistry {
   static registerUseCases(): void {
@@ -24,6 +28,15 @@ export class UseCaseRegistry {
     });
     container.register<ICreateEventUseCase>('ICreateEventUseCase', {
       useClass: CreateEventUseCase
+    });
+    container.register<ISendEventInvitationUseCase>(
+      'ISendEventInvitationUseCase',
+      {
+        useClass: SendEventInvitationUseCase
+      }
+    );
+    container.register<IEventRegistrationUseCase>('IEventRegistrationUseCase', {
+      useClass: EventRegistrationUseCase
     });
   }
 }

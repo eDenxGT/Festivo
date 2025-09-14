@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { FormikProps } from "formik";
-import { Mail, Plus, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,25 +12,25 @@ import type {
 
 const GuestInvitationForm = ({
 	formik,
-	addEmail,
+	addPerson,
 }: {
 	formik: FormikProps<EventFormValues>;
-	addEmail: (email: string, field: MailTypes) => void;
+	addPerson: (
+		data: { email: string; name: string },
+		field: MailTypes
+	) => void;
 }) => {
-	const [newGuestEmail, setNewGuestEmail] = useState("");
-	const [suggestedEmails] = useState(["aadilmk@gmail.com"]);
+	const [newGuest, setNewGuest] = useState({ name: "", email: "" });
 
-	const addGuestEmail = (email: string) => {
-		addEmail(email, "guest_emails");
-		setNewGuestEmail("");
+	const addGuest = () => {
+		addPerson(newGuest, "guests");
+		setNewGuest({ name: "", email: "" });
 	};
 
-	const removeGuestEmail = (emailToRemove: string) => {
+	const removeGuest = (emailToRemove: string) => {
 		formik.setFieldValue(
-			"guest_emails",
-			formik.values.guest_emails.filter(
-				(email) => email !== emailToRemove
-			)
+			"guests",
+			formik.values.guests.filter((g) => g.email !== emailToRemove)
 		);
 	};
 
@@ -43,79 +43,59 @@ const GuestInvitationForm = ({
 				<h3 className="text-lg font-semibold">Guest Invitations</h3>
 			</div>
 
-			{/* Add Guest Email */}
+			{/* Add Guest Name + Email */}
 			<div className="space-y-4">
-				<Label className="text-sm font-medium">
-					<Mail className="inline h-4 w-4 mr-1" />
-					Invite guests via email
-				</Label>
+				<Label className="text-sm font-medium">Invite Guests</Label>
 
 				<div className="flex gap-2">
 					<Input
+						type="text"
+						placeholder="Guest name"
+						value={newGuest.name}
+						onChange={(e) =>
+							setNewGuest({ ...newGuest, name: e.target.value })
+						}
+						className="h-12 w-1/3"
+					/>
+					<Input
 						type="email"
-						placeholder="Enter guest email address"
-						value={newGuestEmail}
-						onChange={(e) => setNewGuestEmail(e.target.value)}
-						className="h-12"
-						onKeyPress={(e) => {
-							if (e.key === "Enter") {
-								e.preventDefault();
-								addGuestEmail(newGuestEmail);
-							}
-						}}
+						placeholder="Guest email"
+						value={newGuest.email}
+						onChange={(e) =>
+							setNewGuest({ ...newGuest, email: e.target.value })
+						}
+						className="h-12 w-2/3"
 					/>
 					<Button
 						type="button"
-						onClick={() => addGuestEmail(newGuestEmail)}
+						onClick={addGuest}
 						className="h-12 px-6">
 						<Plus className="h-4 w-4 mr-2" />
 						Add
 					</Button>
 				</div>
 
-				{/* Suggested Emails */}
-				{suggestedEmails.length > 0 && (
-					<div className="space-y-2">
-						<Label className="text-xs text-muted-foreground">
-							Quick add:
-						</Label>
-						<div className="flex flex-wrap gap-2">
-							{suggestedEmails.map((email) => (
-								<Button
-									key={email}
-									type="button"
-									variant="outline"
-									size="sm"
-									onClick={() => addGuestEmail(email)}
-									disabled={formik.values.guest_emails.includes(
-										email
-									)}>
-									{email}
-								</Button>
-							))}
-						</div>
-					</div>
-				)}
-
-				{/* Guest Email List */}
-				{formik.values.guest_emails.length > 0 && (
+				{/* Guest List */}
+				{formik.values.guests.length > 0 && (
 					<div className="space-y-2">
 						<Label className="text-sm font-medium">
-							Invited Guests ({formik.values.guest_emails.length})
+							Invited Guests ({formik.values.guests.length})
 						</Label>
 						<div className="flex flex-wrap gap-2">
-							{formik.values.guest_emails.map((email, index) => (
+							{formik.values.guests.map((guest, index) => (
 								<Badge
 									key={index}
 									variant="secondary"
 									className="pr-1">
-									{email}
+									{guest.name} ({guest.email})
 									<Button
 										type="button"
 										variant="ghost"
 										size="sm"
 										className="h-4 w-4 p-0 ml-2 hover:bg-destructive hover:text-destructive-foreground"
-										onClick={() => removeGuestEmail(email)}>
+										onClick={() =>
+											removeGuest(guest.email)
+										}>
 										<X className="h-3 w-3" />
 									</Button>
 								</Badge>

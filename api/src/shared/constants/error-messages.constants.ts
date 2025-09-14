@@ -20,6 +20,8 @@ export const ERROR_MESSAGES = {
     ACCOUNT_EXISTS: 'Account already exists',
     ACCOUNT_NOT_FOUND: 'Account not exists',
     INVALID_CREDENTIALS: 'Invalid credentials',
-    VALIDATION_FAILED: 'Validation Failed'
+    VALIDATION_FAILED: 'Validation Failed',
+
+    REGISTRATION_EXISTS: 'You already registered for this event'
   }
 };

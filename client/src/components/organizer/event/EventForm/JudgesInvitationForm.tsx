@@ -1,9 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { FormikProps } from "formik";
-import { Mail, Plus, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useState } from "react";
-import { useToaster } from "@/hooks/ui/useToaster";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type {
@@ -13,25 +12,25 @@ import type {
 
 const JudgesInvitationForm = ({
 	formik,
-	addEmail,
+	addPerson,
 }: {
 	formik: FormikProps<EventFormValues>;
-	addEmail: (email: string, field: MailTypes) => void;
+	addPerson: (
+		data: { email: string; name: string },
+		field: MailTypes
+	) => void;
 }) => {
-	const [newJudgesEmail, setNewJudgesEmail] = useState("");
-	const [suggestedEmails] = useState(["aadilmk@gmail.com"]);
+	const [newJudge, setNewJudge] = useState({ name: "", email: "" });
 
-	const addJudgesEmail = (email: string) => {
-		addEmail(email, "judges_emails");
-		setNewJudgesEmail("");
+	const addJudges = () => {
+		addPerson(newJudge, "judges");
+		setNewJudge({ name: "", email: "" });
 	};
 
-	const removeJudgesEmail = (emailToRemove: string) => {
+	const removeJudges = (emailToRemove: string) => {
 		formik.setFieldValue(
-			"judges_emails",
-			formik.values.judges_emails.filter(
-				(email) => email !== emailToRemove
-			)
+			"judges",
+			formik.values.judges.filter((g) => g.email !== emailToRemove)
 		);
 	};
 
@@ -44,81 +43,58 @@ const JudgesInvitationForm = ({
 				<h3 className="text-lg font-semibold">Judges Invitations</h3>
 			</div>
 
-			{/* Add Judges Email */}
+			{/* Add Judge Name + Email */}
 			<div className="space-y-4">
-				<Label className="text-sm font-medium">
-					<Mail className="inline h-4 w-4 mr-1" />
-					Invite Judges via email
-				</Label>
+				<Label className="text-sm font-medium">Invite Judges</Label>
 
 				<div className="flex gap-2">
 					<Input
+						type="text"
+						placeholder="Judge name"
+						value={newJudge.name}
+						onChange={(e) =>
+							setNewJudge({ ...newJudge, name: e.target.value })
+						}
+						className="h-12 w-1/3"
+					/>
+					<Input
 						type="email"
-						placeholder="Enter Judges email address"
-						value={newJudgesEmail}
-						onChange={(e) => setNewJudgesEmail(e.target.value)}
-						className="h-12"
-						onKeyPress={(e) => {
-							if (e.key === "Enter") {
-								e.preventDefault();
-								addJudgesEmail(newJudgesEmail);
-							}
-						}}
+						placeholder="Judge email"
+						value={newJudge.email}
+						onChange={(e) =>
+							setNewJudge({ ...newJudge, email: e.target.value })
+						}
+						className="h-12 w-2/3"
 					/>
 					<Button
 						type="button"
-						onClick={() => addJudgesEmail(newJudgesEmail)}
+						onClick={addJudges}
 						className="h-12 px-6">
 						<Plus className="h-4 w-4 mr-2" />
 						Add
 					</Button>
 				</div>
 
-				{/* Suggested Emails */}
-				{suggestedEmails.length > 0 && (
-					<div className="space-y-2">
-						<Label className="text-xs text-muted-foreground">
-							Quick add:
-						</Label>
-						<div className="flex flex-wrap gap-2">
-							{suggestedEmails.map((email) => (
-								<Button
-									key={email}
-									type="button"
-									variant="outline"
-									size="sm"
-									onClick={() => addJudgesEmail(email)}
-									disabled={formik.values.judges_emails.includes(
-										email
-									)}>
-									{email}
-								</Button>
-							))}
-						</div>
-					</div>
-				)}
-
-				{/* Judges Email List */}
-				{formik.values.judges_emails.length > 0 && (
+				{/* Judge List */}
+				{formik.values.judges.length > 0 && (
 					<div className="space-y-2">
 						<Label className="text-sm font-medium">
-							Invited Judges ({formik.values.judges_emails.length}
-							)
+							Invited Judges ({formik.values.judges.length})
 						</Label>
 						<div className="flex flex-wrap gap-2">
-							{formik.values.judges_emails.map((email, index) => (
+							{formik.values.judges.map((judge, index) => (
 								<Badge
 									key={index}
 									variant="secondary"
 									className="pr-1">
-									{email}
+									{judge.name} ({judge.email})
 									<Button
 										type="button"
 										variant="ghost"
 										size="sm"
 										className="h-4 w-4 p-0 ml-2 hover:bg-destructive hover:text-destructive-foreground"
 										onClick={() =>
-											removeJudgesEmail(email)
+											removeJudges(judge.email)
 										}>
 										<X className="h-3 w-3" />
 									</Button>

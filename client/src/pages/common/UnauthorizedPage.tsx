@@ -6,8 +6,8 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Shield, Home, LogIn, ArrowLeft } from "lucide-react";
-import { Link, useNavigate } from "react-router";
+import { Shield, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router";
 
 export default function UnauthorizedPage() {
 	const navigate = useNavigate();

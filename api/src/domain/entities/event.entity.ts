@@ -4,6 +4,11 @@ export interface FoodOptions {
   evening?: boolean;
 }
 
+export interface EventSpecialParticipant {
+  email: string;
+  name: string;
+}
+
 export interface IEvent {
   id: string;
   organizer_id: string;
@@ -17,6 +22,8 @@ export interface IEvent {
   food_available: boolean;
   food_options?: FoodOptions;
   max_tickets: number;
+  guests: EventSpecialParticipant[];
+  judges: EventSpecialParticipant[];
   created_at: Date;
   updated_at: Date;
 }

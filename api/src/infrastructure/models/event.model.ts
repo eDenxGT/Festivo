@@ -21,6 +21,18 @@ const eventSchema = new Schema<IEventModel>(
       noon: { type: Boolean },
       evening: { type: Boolean }
     },
+    guests: [
+      {
+        email: { type: String },
+        name: { type: String }
+      }
+    ],
+    judges: [
+      {
+        email: { type: String },
+        name: { type: String }
+      }
+    ],
     max_tickets: { type: Number, required: true }
   },
   {

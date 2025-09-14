@@ -9,18 +9,23 @@ export interface IRegistrationModel
 
 const registrationSchema = new Schema<IRegistrationModel>(
   {
-    user_id: { type: String, required: true, ref: 'User' },
     event_id: { type: String, required: true, ref: 'Event' },
+    participant_details: {
+      id: { type: String },
+      name: { type: String, required: true },
+      email: { type: String, required: true },
+      is_special: { type: Boolean, required: true }
+    },
     role: {
       type: String,
       enum: ['participant', 'guest', 'judge'],
       required: true
     },
-    qr_code: { type: String, required: true, unique: true },
     entry_ticket_status: {
       type: String,
       enum: ['valid', 'used'],
-      required: true
+      required: true,
+      default: 'valid'
     },
     food_coupons: {
       morning: {

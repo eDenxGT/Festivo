@@ -2,6 +2,7 @@ import { Header } from "@/components/common/Header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { PATH } from "@/utils/constants/paths";
 import { ArrowRight, Shield, Ticket, Users, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -34,13 +35,13 @@ export default function LandingPage() {
 						<Button
 							size="lg"
 							className="bg-primary text-primary-foreground hover:bg-primary/90">
-							<Link to="/user/signup">
+							<Link to={PATH.USER.SIGNUP}>
 								Start Exploring Events
 							</Link>
 						</Button>
 						<Button size="lg" variant="outline">
-							<Link to="/org/signup">
-								Wanna be an Organizer ?
+							<Link to={PATH.ORG.SIGNIN}>
+								Join as an Organizer ?
 							</Link>
 						</Button>
 					</div>
@@ -167,7 +168,7 @@ export default function LandingPage() {
 						size="lg"
 						asChild
 						className="bg-primary text-primary-foreground hover:bg-primary/90">
-						<Link to="/user/signup">
+						<Link to={PATH.USER.SIGNUP}>
 							Get Started for Free{" "}
 							<ArrowRight className="ml-2 h-4 w-4" />
 						</Link>

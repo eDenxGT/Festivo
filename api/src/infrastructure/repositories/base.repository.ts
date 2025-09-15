@@ -4,8 +4,8 @@ import { IBaseRepository } from '../../domain/repositoryInterfaces/base-reposito
 export class BaseRepository<T> implements IBaseRepository<T> {
   constructor(protected model: Model<T>) {}
 
-  async find(filter: FilterQuery<T> = {}) {
-    return this.model.find(filter);
+  async find(filter: FilterQuery<T> = {}): Promise<T[]> {
+    return this.model.find(filter).exec();
   }
 
   async findAll(filter: FilterQuery<T> = {}, skip = 0, limit = 10) {

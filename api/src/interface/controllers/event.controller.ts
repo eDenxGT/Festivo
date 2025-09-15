@@ -6,12 +6,24 @@ import { handleSuccessResponse } from '../../shared/utils/helpers/response.handl
 import { HTTP_STATUS } from '../../shared/constants';
 import { SUCCESS_MESSAGES } from '../../shared/constants/success-messages.constants';
 import { CustomRequest } from '../middlewares/auth.middleware';
+import { IGetEventsForOrganizerUseCase } from '../../domain/usecaseInterfaces/event/get-events-for-organizer.usecase';
+import { IGetEventByIdUseCase } from '../../domain/usecaseInterfaces/event/get-event-by-id-usecase.interface';
+import { AppError } from '../../shared/errors/AppError';
+import { ERROR_MESSAGES } from '../../shared/constants/error-messages.constants';
+import { EditEventDTO } from '../../application/dtos/event/input/edit-event.dto';
+import { IUpdateEventUseCase } from '../../domain/usecaseInterfaces/event/update-event-usecase.interface';
 
 @injectable()
 export class EventController {
   constructor(
     @inject('ICreateEventUseCase')
-    private _createEventUseCase: ICreateEventUseCase
+    private _createEventUseCase: ICreateEventUseCase,
+    @inject('IGetEventsForOrganizerUseCase')
+    private _getEventsForOrganizerUseCase: IGetEventsForOrganizerUseCase,
+    @inject('IGetEventByIdUseCase')
+    private _getEventByIdUseCase: IGetEventByIdUseCase,
+    @inject('IUpdateEventUseCase')
+    private _updateEventUseCase: IUpdateEventUseCase
   ) {}
 
   createEvent = async (req: Request, res: Response) => {
@@ -29,5 +41,44 @@ export class EventController {
       HTTP_STATUS.CREATED,
       SUCCESS_MESSAGES.EVENT_CREATION_SUCCESS
     );
+  };
+
+  getEventsForOrganizer = async (req: Request, res: Response) => {
+    const organizer_id = (req as CustomRequest).user.id;
+    const events =
+      await this._getEventsForOrganizerUseCase.execute(organizer_id);
+
+    handleSuccessResponse(
+      res,
+      HTTP_STATUS.OK,
+      SUCCESS_MESSAGES.DATA_FETCHING_SUCCESS,
+      events
+    );
+  };
+
+  getEventById = async (req: Request, res: Response) => {
+    const event_id = req.params['event_id'];
+
+    if (!event_id) {
+      throw new AppError(
+        ERROR_MESSAGES.CLIENT.INVALID_PARAMS,
+        HTTP_STATUS.BAD_REQUEST
+      );
+    }
+    const event = await this._getEventByIdUseCase.execute(event_id);
+
+    handleSuccessResponse(
+      res,
+      HTTP_STATUS.OK,
+      SUCCESS_MESSAGES.DATA_FETCHING_SUCCESS,
+      event
+    );
+  };
+
+  updateEvent = async (req: Request, res: Response) => {
+    const data: EditEventDTO = req.body;
+    await this._updateEventUseCase.execute(data);
+
+    handleSuccessResponse(res, HTTP_STATUS.OK, SUCCESS_MESSAGES.UPDATE_SUCCESS);
   };
 }

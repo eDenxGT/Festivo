@@ -14,6 +14,8 @@ export const ERROR_MESSAGES = {
 
     INVALID_PRICE: 'Please enter a price.',
 
+    INVALID_PARAMS: 'Invalid Parameters.',
+
     TOKEN_EXPIRED: 'Token Expired. Please log in',
     INVALID_TOKEN: 'Invalid Token',
 

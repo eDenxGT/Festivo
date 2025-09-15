@@ -1,57 +1,43 @@
 import { eventValidationSchema } from "@/utils/validations/events/create-event.validator";
 import { useFormik } from "formik";
-import { useCreateEventMutation } from "../mutations/useCreateEventMutation";
 import { useToaster } from "@/hooks/ui/useToaster";
 import { useNavigate } from "react-router";
 import { PATH } from "@/utils/constants/paths";
-
-export interface EventFormValues {
-	title: string;
-	description: string;
-	location: string;
-	floor_details: string;
-	date: Date | undefined;
-	is_paid: boolean;
-	price: number | undefined;
-	food_available: boolean;
-	food_options: {
-		morning: boolean;
-		noon: boolean;
-		evening: boolean;
-	};
-	max_tickets: number;
-	guests: { name: string; email: string }[];
-	judges: { name: string; email: string }[];
-}
-
-const initialValues: EventFormValues = {
-	title: "",
-	description: "",
-	location: "",
-	floor_details: "",
-	date: undefined,
-	is_paid: false,
-	price: undefined,
-	food_available: false,
-	food_options: {
-		morning: false,
-		noon: false,
-		evening: false,
-	},
-	max_tickets: 100,
-	guests: [],
-	judges: [],
-};
+import type { IEvent } from "@/types/EventTypes";
+import { useEditEventMutation } from "../mutations/useEditEventMutation";
+import type { EventFormValues } from "./useCreateEventForm";
 
 export type MailTypes = "guests" | "judges";
 
-export const useCreateEventForm = () => {
-	const { mutate, isPending, isError } = useCreateEventMutation();
+export interface EditEventFormValues extends EventFormValues {
+	id?: string;
+}
+
+export const useEditEventForm = (event: IEvent) => {
+	const { mutate, isPending, isError } = useEditEventMutation();
 	const { successToast, errorToast } = useToaster();
 	const navigate = useNavigate();
-
-	const formik = useFormik({
-		initialValues,
+	const formik = useFormik<EditEventFormValues>({
+		initialValues: {
+			id: event?.id,
+			title: event?.title,
+			description: event?.description,
+			location: event?.location,
+			floor_details: event?.floor_details!,
+			date: event?.date,
+			is_paid: event?.is_paid,
+			price: event?.price,
+			food_available: event?.food_available,
+			food_options: {
+				morning: event?.food_options?.morning!,
+				noon: event?.food_options?.noon!,
+				evening: event?.food_options?.evening!,
+			},
+			max_tickets: event?.max_tickets,
+			guests: event?.guests || [],
+			judges: event?.guests || [],
+		},
+		enableReinitialize: true,
 		validationSchema: eventValidationSchema,
 
 		onSubmit: (values) => {

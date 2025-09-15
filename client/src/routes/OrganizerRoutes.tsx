@@ -8,6 +8,8 @@ import SignUpPage from "@/pages/organizer/OrganizerSignUpPage";
 import OrganizerDashboard from "@/pages/organizer/OrganizerDashboard";
 import NotFoundPage from "@/pages/common/NotFound";
 import OrganizerCreateEventPage from "@/pages/organizer/OrganizerCreateEventPage";
+import { OrganizerMyEventsPage } from "@/pages/organizer/OrganizerMyEventsPage";
+import OrganizerEditEventPage from "@/pages/organizer/OrganizerEditEventPage";
 
 const OrganizerRoutes = () => {
 	return (
@@ -35,6 +37,11 @@ const OrganizerRoutes = () => {
 					path="/create-event"
 					element={<OrganizerCreateEventPage />}
 				/>
+				<Route
+					path="/edit-event/:event_id"
+					element={<OrganizerEditEventPage />}
+				/>
+				<Route path="/my-events" element={<OrganizerMyEventsPage />} />
 			</Route>
 			<Route path="*" element={<NotFoundPage />} />
 		</Routes>

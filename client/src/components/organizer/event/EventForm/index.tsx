@@ -17,12 +17,28 @@ import TicketDetailsForm from "./TicketDetailsForm";
 import FoodForm from "./FoodForm";
 import GuestInvitationForm from "./GuestInvitationForm";
 import JudgesInvitationForm from "./JudgesInvitationForm";
-import { useCreateEventForm } from "@/hooks/events/forms/useCreateEventForm";
 import { useToaster } from "@/hooks/ui/useToaster";
+import type { FormikProps } from "formik";
+import type {
+	EventFormValues,
+	MailTypes,
+} from "@/hooks/events/forms/useCreateEventForm";
+import type { EditEventFormValues } from "@/hooks/events/forms/useEditEventForm";
 
-export default function EventForm() {
-	const { formik, isLoading, addPerson } = useCreateEventForm();
-
+export default function EventForm({
+	formik,
+	isLoading,
+	addPerson,
+	isForEdit,
+}: {
+	formik: FormikProps<EventFormValues | EditEventFormValues>;
+	isLoading: boolean;
+	addPerson: (
+		data: { email: string; name: string },
+		field: MailTypes
+	) => void;
+	isForEdit: boolean;
+}) {
 	const { errorToast } = useToaster();
 
 	return (
@@ -43,11 +59,10 @@ export default function EventForm() {
 								<Plus className="h-8 w-8 text-primary" />
 							</div>
 							<CardTitle className="text-3xl font-bold">
-								Create New Event
+								{isForEdit ? "Edit Event" : "Create New Event"}
 							</CardTitle>
 							<CardDescription className="text-muted-foreground">
-								Fill in the details below to create your amazing
-								event
+								Make changes below and Submit
 							</CardDescription>
 						</CardHeader>
 
@@ -72,6 +87,7 @@ export default function EventForm() {
 
 								{/* Guest Invitations */}
 								<GuestInvitationForm
+									disabled={isForEdit}
 									addPerson={addPerson}
 									formik={formik}
 								/>
@@ -79,6 +95,7 @@ export default function EventForm() {
 								<Separator />
 
 								<JudgesInvitationForm
+									disabled={isForEdit}
 									addPerson={addPerson}
 									formik={formik}
 								/>
@@ -115,7 +132,11 @@ export default function EventForm() {
 										className="h-12 px-8 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-60"
 										disabled={isLoading}>
 										{isLoading
-											? "Creating Event..."
+											? isForEdit
+												? "Saving.."
+												: "Creating Event..."
+											: isForEdit
+											? "Save"
 											: "Create Event"}
 									</Button>
 								</div>

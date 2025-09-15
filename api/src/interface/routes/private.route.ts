@@ -1,4 +1,5 @@
 import { CreateEventDTO } from '../../application/dtos/event/input/create-event.dto';
+import { EditEventDTO } from '../../application/dtos/event/input/edit-event.dto';
 import {
   authController,
   eventController
@@ -23,6 +24,19 @@ export class PrivateRoutes extends BaseRoute {
         verifyAuth,
         validateDTO(CreateEventDTO),
         asyncHandler(eventController.createEvent)
+      );
+
+    this.router
+      .route('/events/:event_id')
+      .get(verifyAuth, asyncHandler(eventController.getEventById));
+
+    this.router
+      .route('/org/events')
+      .get(verifyAuth, asyncHandler(eventController.getEventsForOrganizer))
+      .put(
+        verifyAuth,
+        validateDTO(EditEventDTO),
+        asyncHandler(eventController.updateEvent)
       );
 
     //* ─────────────────────────────────────────────────────────────

@@ -13,12 +13,14 @@ import type {
 const JudgesInvitationForm = ({
 	formik,
 	addPerson,
+	disabled,
 }: {
 	formik: FormikProps<EventFormValues>;
 	addPerson: (
 		data: { email: string; name: string },
 		field: MailTypes
 	) => void;
+	disabled: boolean;
 }) => {
 	const [newJudge, setNewJudge] = useState({ name: "", email: "" });
 
@@ -45,35 +47,49 @@ const JudgesInvitationForm = ({
 
 			{/* Add Judge Name + Email */}
 			<div className="space-y-4">
-				<Label className="text-sm font-medium">Invite Judges</Label>
+				{!disabled && (
+					<>
+						<Label className="text-sm font-medium">
+							Invite Judges
+						</Label>
 
-				<div className="flex gap-2">
-					<Input
-						type="text"
-						placeholder="Judge name"
-						value={newJudge.name}
-						onChange={(e) =>
-							setNewJudge({ ...newJudge, name: e.target.value })
-						}
-						className="h-12 w-1/3"
-					/>
-					<Input
-						type="email"
-						placeholder="Judge email"
-						value={newJudge.email}
-						onChange={(e) =>
-							setNewJudge({ ...newJudge, email: e.target.value })
-						}
-						className="h-12 w-2/3"
-					/>
-					<Button
-						type="button"
-						onClick={addJudges}
-						className="h-12 px-6">
-						<Plus className="h-4 w-4 mr-2" />
-						Add
-					</Button>
-				</div>
+						<div className="flex gap-2">
+							<Input
+								disabled={disabled}
+								type="text"
+								placeholder="Judge name"
+								value={newJudge.name}
+								onChange={(e) =>
+									setNewJudge({
+										...newJudge,
+										name: e.target.value,
+									})
+								}
+								className="h-12 w-1/3"
+							/>
+							<Input
+								type="email"
+								disabled={disabled}
+								placeholder="Judge email"
+								value={newJudge.email}
+								onChange={(e) =>
+									setNewJudge({
+										...newJudge,
+										email: e.target.value,
+									})
+								}
+								className="h-12 w-2/3"
+							/>
+							<Button
+								type="button"
+								onClick={addJudges}
+								className="h-12 px-6">
+								<Plus className="h-4 w-4 mr-2" />
+								Add
+							</Button>
+						</div>
+					</>
+				)}
 
 				{/* Judge List */}
 				{formik.values.judges.length > 0 && (
@@ -88,16 +104,19 @@ const JudgesInvitationForm = ({
 									variant="secondary"
 									className="pr-1">
 									{judge.name} ({judge.email})
-									<Button
-										type="button"
-										variant="ghost"
-										size="sm"
-										className="h-4 w-4 p-0 ml-2 hover:bg-destructive hover:text-destructive-foreground"
-										onClick={() =>
-											removeJudges(judge.email)
-										}>
-										<X className="h-3 w-3" />
-									</Button>
+									{!disabled && (
+										<Button
+											type="button"
+											disabled={disabled}
+											variant="ghost"
+											size="sm"
+											className="h-4 w-4 p-0 ml-2 hover:bg-destructive hover:text-destructive-foreground"
+											onClick={() =>
+												removeJudges(judge.email)
+											}>
+											<X className="h-3 w-3" />
+										</Button>
+									)}
 								</Badge>
 							))}
 						</div>

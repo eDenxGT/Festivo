@@ -14,6 +14,12 @@ import { SendEventInvitationUseCase } from '../../application/usecases/event/sen
 import { ISendEventInvitationUseCase } from '../../domain/usecaseInterfaces/event/send-event-invitation-usecase.interface';
 import { EventRegistrationUseCase } from '../../application/usecases/event/event-registration.usecase';
 import { IEventRegistrationUseCase } from '../../domain/usecaseInterfaces/event/event-registration-usecase.interface';
+import { IGetEventsForOrganizerUseCase } from '../../domain/usecaseInterfaces/event/get-events-for-organizer.usecase';
+import { GetEventsForOrganizerUseCase } from '../../application/usecases/event/get-events-for-organizer.usecase';
+import { IGetEventByIdUseCase } from '../../domain/usecaseInterfaces/event/get-event-by-id-usecase.interface';
+import { GetEventByIdUseCase } from '../../application/usecases/event/get-event-by-id.usecase';
+import { IUpdateEventUseCase } from '../../domain/usecaseInterfaces/event/update-event-usecase.interface';
+import { UpdateEventUseCase } from '../../application/usecases/event/update-event.usecase';
 
 export class UseCaseRegistry {
   static registerUseCases(): void {
@@ -37,6 +43,18 @@ export class UseCaseRegistry {
     );
     container.register<IEventRegistrationUseCase>('IEventRegistrationUseCase', {
       useClass: EventRegistrationUseCase
+    });
+    container.register<IGetEventsForOrganizerUseCase>(
+      'IGetEventsForOrganizerUseCase',
+      {
+        useClass: GetEventsForOrganizerUseCase
+      }
+    );
+    container.register<IGetEventByIdUseCase>('IGetEventByIdUseCase', {
+      useClass: GetEventByIdUseCase
+    });
+    container.register<IUpdateEventUseCase>('IUpdateEventUseCase', {
+      useClass: UpdateEventUseCase
     });
   }
 }

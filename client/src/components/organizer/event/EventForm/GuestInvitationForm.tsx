@@ -13,12 +13,14 @@ import type {
 const GuestInvitationForm = ({
 	formik,
 	addPerson,
+	disabled,
 }: {
 	formik: FormikProps<EventFormValues>;
 	addPerson: (
 		data: { email: string; name: string },
 		field: MailTypes
 	) => void;
+	disabled: boolean;
 }) => {
 	const [newGuest, setNewGuest] = useState({ name: "", email: "" });
 
@@ -45,36 +47,49 @@ const GuestInvitationForm = ({
 
 			{/* Add Guest Name + Email */}
 			<div className="space-y-4">
-				<Label className="text-sm font-medium">Invite Guests</Label>
+				{!disabled && (
+					<>
+						<Label className="text-sm font-medium">
+							Invite Guests
+						</Label>
 
-				<div className="flex gap-2">
-					<Input
-						type="text"
-						placeholder="Guest name"
-						value={newGuest.name}
-						onChange={(e) =>
-							setNewGuest({ ...newGuest, name: e.target.value })
-						}
-						className="h-12 w-1/3"
-					/>
-					<Input
-						type="email"
-						placeholder="Guest email"
-						value={newGuest.email}
-						onChange={(e) =>
-							setNewGuest({ ...newGuest, email: e.target.value })
-						}
-						className="h-12 w-2/3"
-					/>
-					<Button
-						type="button"
-						onClick={addGuest}
-						className="h-12 px-6">
-						<Plus className="h-4 w-4 mr-2" />
-						Add
-					</Button>
-				</div>
-
+						<div className="flex gap-2">
+							<Input
+								type="text"
+								disabled={disabled}
+								placeholder="Guest name"
+								value={newGuest.name}
+								onChange={(e) =>
+									setNewGuest({
+										...newGuest,
+										name: e.target.value,
+									})
+								}
+								className="h-12 w-1/3"
+							/>
+							<Input
+								type="email"
+								placeholder="Guest email"
+								disabled={disabled}
+								value={newGuest.email}
+								onChange={(e) =>
+									setNewGuest({
+										...newGuest,
+										email: e.target.value,
+									})
+								}
+								className="h-12 w-2/3"
+							/>
+							<Button
+								type="button"
+								onClick={addGuest}
+								className="h-12 px-6">
+								<Plus className="h-4 w-4 mr-2" />
+								Add
+							</Button>
+						</div>
+					</>
+				)}
 				{/* Guest List */}
 				{formik.values.guests.length > 0 && (
 					<div className="space-y-2">
@@ -88,16 +103,19 @@ const GuestInvitationForm = ({
 									variant="secondary"
 									className="pr-1">
 									{guest.name} ({guest.email})
-									<Button
-										type="button"
-										variant="ghost"
-										size="sm"
-										className="h-4 w-4 p-0 ml-2 hover:bg-destructive hover:text-destructive-foreground"
-										onClick={() =>
-											removeGuest(guest.email)
-										}>
-										<X className="h-3 w-3" />
-									</Button>
+									{!disabled && (
+										<Button
+											type="button"
+											disabled={disabled}
+											variant="ghost"
+											size="sm"
+											className="h-4 w-4 p-0 ml-2 hover:bg-destructive hover:text-destructive-foreground"
+											onClick={() =>
+												removeGuest(guest.email)
+											}>
+											<X className="h-3 w-3" />
+										</Button>
+									)}
 								</Badge>
 							))}
 						</div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { PATH } from "@/utils/constants/paths";
 
 export function Header({
 	role = "user",
@@ -32,7 +33,9 @@ export function Header({
 			}`}>
 			<div className="flex items-center justify-between px-6 py-4">
 				{/* Logo */}
-				<Link to="/" className="flex items-center space-x-2">
+				<Link
+					to={PATH.LANDING_PAGE}
+					className="flex items-center space-x-2">
 					<div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
 						Festivo
 					</div>
@@ -76,12 +79,22 @@ export function Header({
 								variant="ghost"
 								asChild
 								className="text-foreground/80 hover:text-primary">
-								<Link to={`/${role === "organizer" ? "org" : role}/signin`}>Sign In</Link>
+								<Link
+									to={`/${
+										role === "organizer" ? "org" : role
+									}/signin`}>
+									Sign In
+								</Link>
 							</Button>
 							<Button
 								asChild
 								className="bg-primary text-primary-foreground hover:bg-primary/90">
-								<Link to={`/${role === "organizer" ? "org" : role}/signup`}>Sign Up</Link>
+								<Link
+									to={`/${
+										role === "organizer" ? "org" : role
+									}/signup`}>
+									Sign Up
+								</Link>
 							</Button>
 						</>
 					)}
@@ -138,14 +151,24 @@ export function Header({
 										variant="ghost"
 										asChild
 										className="justify-start text-foreground/80 hover:text-primary">
-										<Link to={`/${role === "organizer" ? "org" : role}/signin`}>
+										<Link
+											to={`/${
+												role === "organizer"
+													? "org"
+													: role
+											}/signin`}>
 											Sign In
 										</Link>
 									</Button>
 									<Button
 										asChild
 										className="bg-primary text-primary-foreground hover:bg-primary/90">
-										<Link to={`/${role === "organizer" ? "org" : role}/signup`}>
+										<Link
+											to={`/${
+												role === "organizer"
+													? "org"
+													: role
+											}/signup`}>
 											Sign Up
 										</Link>
 									</Button>

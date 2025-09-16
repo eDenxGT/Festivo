@@ -7,12 +7,20 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
 import { Edit, Eye } from "lucide-react";
 import { EventDetailsDialog } from "./EventDetailsDialog";
 import type { IEvent } from "@/types/EventTypes";
 import { formatDate } from "@/utils/helpers/date.formatter";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router";
 
 const EventsTable = ({
 	events,
@@ -23,6 +31,7 @@ const EventsTable = ({
 	handleAction: (event_id: string) => void;
 	isForOrganizer?: boolean;
 }) => {
+	const navigate = useNavigate();
 	return (
 		<Table>
 			<TableHeader>
@@ -109,14 +118,53 @@ const EventsTable = ({
 									<EventDetailsDialog event={event} />
 								</Dialog>
 
-								<Button
-									variant="outline"
-									size="sm"
-									onClick={() => handleAction(event.id)}
-									className="text-blue-600 border-blue-200 hover:bg-blue-50">
-									<Edit className="h-4 w-4 mr-1" />
-									{isForOrganizer ? "Edit" : "Register"}
-								</Button>
+								{isForOrganizer ? (
+									<Button
+										variant="outline"
+										size="sm"
+										onClick={() => handleAction(event.id)}
+										className="text-blue-600 border-blue-200 hover:bg-blue-50">
+										<Edit className="h-4 w-4 mr-1" />
+										Edit
+									</Button>
+								) : (
+									<Dialog>
+										<DialogTrigger asChild>
+											<Button
+												variant="outline"
+												size="sm"
+												className="text-blue-600 border-blue-200 hover:bg-blue-50">
+												<Edit className="h-4 w-4 mr-1" />
+												Register
+											</Button>
+										</DialogTrigger>
+										<DialogContent>
+											<DialogHeader>
+												<DialogTitle>
+													Confirm Registration
+												</DialogTitle>
+												<DialogDescription>
+													Are you sure you want to
+													register for this event?
+												</DialogDescription>
+											</DialogHeader>
+											<div className="flex justify-end gap-2 mt-4">
+												<Button variant="outline">
+													Cancel
+												</Button>
+												<Button
+													onClick={() => {
+														handleAction(event.id);
+														navigate(
+															"/user/events"
+														);
+													}}>
+													Confirm
+												</Button>
+											</div>
+										</DialogContent>
+									</Dialog>
+								)}
 							</div>
 						</TableCell>
 					</TableRow>

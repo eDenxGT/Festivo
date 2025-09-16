@@ -40,4 +40,6 @@ const eventSchema = new Schema<IEventModel>(
   }
 );
 
+eventSchema.index({ title: 'text', location: 'text', description: 'text' });
+
 export const EventModel = mongoose.model<IEventModel>('Event', eventSchema);

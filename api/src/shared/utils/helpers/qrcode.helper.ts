@@ -4,7 +4,7 @@ export async function generateQRCode(qrPayload: {
   registration_id: string;
   event_id: string;
   email: string;
-  role: 'guest' | 'judge';
+  role: 'guest' | 'judge' | 'participant';
 }) {
   const qrData = JSON.stringify({
     registration_id: qrPayload.registration_id,

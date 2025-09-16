@@ -44,7 +44,7 @@ const MyEvents = ({ events }: { events: IEvent[] }) => {
 							<div className="overflow-x-auto">
 								<EventsTable
 									events={events}
-									handleEditEvent={handleEditEvent}
+									handleAction={handleEditEvent}
 								/>
 							</div>
 						)}

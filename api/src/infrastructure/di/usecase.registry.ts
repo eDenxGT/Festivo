@@ -20,6 +20,10 @@ import { IGetEventByIdUseCase } from '../../domain/usecaseInterfaces/event/get-e
 import { GetEventByIdUseCase } from '../../application/usecases/event/get-event-by-id.usecase';
 import { IUpdateEventUseCase } from '../../domain/usecaseInterfaces/event/update-event-usecase.interface';
 import { UpdateEventUseCase } from '../../application/usecases/event/update-event.usecase';
+import { IGetAllEventsForUserUseCase } from '../../domain/usecaseInterfaces/event/get-all-events-for-user-usecase.interface';
+import { GetAllEventsForUserUseCase } from '../../application/usecases/event/get-all-events-for-user.usecase';
+import { IRegisterEventUseCase } from '../../domain/usecaseInterfaces/event/register-event-usecase.interface';
+import { RegisterEventUseCase } from '../../application/usecases/event/register-event.usecase';
 
 export class UseCaseRegistry {
   static registerUseCases(): void {
@@ -55,6 +59,15 @@ export class UseCaseRegistry {
     });
     container.register<IUpdateEventUseCase>('IUpdateEventUseCase', {
       useClass: UpdateEventUseCase
+    });
+    container.register<IGetAllEventsForUserUseCase>(
+      'IGetAllEventsForUserUseCase',
+      {
+        useClass: GetAllEventsForUserUseCase
+      }
+    );
+    container.register<IRegisterEventUseCase>('IRegisterEventUseCase', {
+      useClass: RegisterEventUseCase
     });
   }
 }

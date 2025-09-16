@@ -7,6 +7,7 @@ import UserSignInPage from "@/pages/user/UserSignInPage";
 import UserSignUpPage from "@/pages/user/UserSignUpPage";
 import UserHomePage from "@/pages/user/UserHomePage";
 import NotFoundPage from "@/pages/common/NotFound";
+import { UserAllEventsPage } from "@/pages/user/UserAllEventsPage";
 
 const UserRoutes = () => {
 	return (
@@ -31,6 +32,7 @@ const UserRoutes = () => {
 					/>
 				}>
 				<Route path="/home" element={<UserHomePage />} />
+				<Route path="/events" element={<UserAllEventsPage />} />
 				<Route path="*" element={<NotFoundPage />} />
 			</Route>
 		</Routes>

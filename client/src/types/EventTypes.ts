@@ -21,6 +21,7 @@ export interface IEvent {
 	price?: number;
 	food_available: boolean;
 	food_options?: FoodOptions;
+	available_tickets?: number;
 	max_tickets: number;
 	guests: EventSpecialParticipant[];
 	judges: EventSpecialParticipant[];

@@ -24,7 +24,8 @@ export class PrivateRoutes extends BaseRoute {
         verifyAuth,
         validateDTO(CreateEventDTO),
         asyncHandler(eventController.createEvent)
-      );
+      )
+      .get(verifyAuth, asyncHandler(eventController.getAllEventsForUser));
 
     this.router
       .route('/events/:event_id')
@@ -39,9 +40,9 @@ export class PrivateRoutes extends BaseRoute {
         asyncHandler(eventController.updateEvent)
       );
 
-    //* ─────────────────────────────────────────────────────────────
-    //*                    🛠️ User Endpoints
-    //* ─────────────────────────────────────────────────────────────
+    this.router
+      .route('/events/registrations')
+      .post(verifyAuth, asyncHandler(eventController.registerEvent));
 
     //* ─────────────────────────────────────────────────────────────
     //*                🛠️ Token Refreshing Endpoint

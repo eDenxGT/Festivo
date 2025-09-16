@@ -13,12 +13,15 @@ import { EventDetailsDialog } from "./EventDetailsDialog";
 import type { IEvent } from "@/types/EventTypes";
 import { formatDate } from "@/utils/helpers/date.formatter";
 import { Button } from "@/components/ui/button";
+
 const EventsTable = ({
 	events,
-	handleEditEvent,
+	handleAction,
+	isForOrganizer = true,
 }: {
 	events: IEvent[];
-	handleEditEvent: (event_id: string) => void;
+	handleAction: (event_id: string) => void;
+	isForOrganizer?: boolean;
 }) => {
 	return (
 		<Table>
@@ -37,7 +40,7 @@ const EventsTable = ({
 						Type
 					</TableHead>
 					<TableHead className="font-semibold text-black-800">
-						Max Tickets
+						Tickets
 					</TableHead>
 					<TableHead className="font-semibold text-black-800">
 						Actions
@@ -86,7 +89,9 @@ const EventsTable = ({
 						</TableCell>
 						<TableCell>
 							<span className="text-sm font-medium">
-								{event.max_tickets}
+								{isForOrganizer
+									? event.max_tickets
+									: `${event.available_tickets}/${event.max_tickets}`}
 							</span>
 						</TableCell>
 						<TableCell>
@@ -107,10 +112,10 @@ const EventsTable = ({
 								<Button
 									variant="outline"
 									size="sm"
-									onClick={() => handleEditEvent(event.id)}
+									onClick={() => handleAction(event.id)}
 									className="text-blue-600 border-blue-200 hover:bg-blue-50">
 									<Edit className="h-4 w-4 mr-1" />
-									Edit
+									{isForOrganizer ? "Edit" : "Register"}
 								</Button>
 							</div>
 						</TableCell>

@@ -35,3 +35,21 @@ export const editEvent = async (
 	const res = await pvtAxiosInstance.put("/org/events", data);
 	return res.data;
 };
+
+export const getAllEventsForUser = async ({ search }: { search: string }) => {
+	const res = await pvtAxiosInstance.get("/events", { params: { search } });
+	return res.data;
+};
+
+export const registerEvent = async (
+	event_id: string
+): Promise<IAxiosResponse> => {
+	const res = await pvtAxiosInstance.post<IAxiosResponse>(
+		"/events/registrations",
+		{
+			event_id,
+		}
+	);
+	
+	return res.data	;
+};

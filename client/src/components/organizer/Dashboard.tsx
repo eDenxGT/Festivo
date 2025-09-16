@@ -1,6 +1,6 @@
 import { Link, useOutletContext } from "react-router";
 import { Card, CardContent } from "../ui/card";
-import { Calendar, Ticket } from "lucide-react";
+import { Calendar, ScanQrCode, Ticket } from "lucide-react";
 import type { Organizer } from "@/types/OrganizerTypes";
 
 const Dashboard = () => {
@@ -52,19 +52,19 @@ const Dashboard = () => {
 						</Card>
 					</Link>
 
-					{/* <Link to="/profile">
+					<Link to="/org/qr-scanner">
 						<Card className="hover:shadow-lg transition rounded-2xl">
 							<CardContent className="flex flex-col items-center justify-center p-6 text-center">
-								<User className="h-10 w-10 text-primary mb-3" />
+								<ScanQrCode className="h-10 w-10 text-primary mb-3" />
 								<h3 className="text-lg font-semibold text-foreground">
-									Profile
+									Scan Qr Code
 								</h3>
 								<p className="text-sm text-muted-foreground">
-									Update your personal details
+									Scan Ticket/Food coupon Qr codes
 								</p>
 							</CardContent>
 						</Card>
-					</Link> */}
+					</Link>
 				</div>
 			</main>
 		</div>

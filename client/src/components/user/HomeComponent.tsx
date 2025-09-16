@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Link, useOutletContext } from "react-router-dom";
-import { Calendar, Ticket, User } from "lucide-react";
+import { Calendar } from "lucide-react";
 import type { User as UserType } from "@/types/UserTypes";
 
 export default function HomeComponent() {
@@ -39,7 +39,7 @@ export default function HomeComponent() {
 						</Card>
 					</Link>
 
-					<Link to="/user/registered-events">
+					{/* <Link to="/user/registered-events">
 						<Card className="hover:shadow-lg transition rounded-2xl">
 							<CardContent className="flex flex-col items-center justify-center p-6 text-center">
 								<Ticket className="h-10 w-10 text-primary mb-3" />
@@ -65,7 +65,7 @@ export default function HomeComponent() {
 								</p>
 							</CardContent>
 						</Card>
-					</Link>
+					</Link> */}
 				</div>
 			</main>
 		</div>

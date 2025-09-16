@@ -14,6 +14,8 @@ import { EditEventDTO } from '../../application/dtos/event/input/edit-event.dto'
 import { IUpdateEventUseCase } from '../../domain/usecaseInterfaces/event/update-event-usecase.interface';
 import { IGetAllEventsForUserUseCase } from '../../domain/usecaseInterfaces/event/get-all-events-for-user-usecase.interface';
 import { IRegisterEventUseCase } from '../../domain/usecaseInterfaces/event/register-event-usecase.interface';
+import { IGetRegistrationDetails } from '../../domain/usecaseInterfaces/event/get-registration-details-usecase.interface';
+import { IUpdateRegistrationStatusUseCase } from '../../domain/usecaseInterfaces/event/update-registration-status-usecase.interface';
 
 @injectable()
 export class EventController {
@@ -29,7 +31,11 @@ export class EventController {
     @inject('IGetAllEventsForUserUseCase')
     private _getAllEventsForUserUseCase: IGetAllEventsForUserUseCase,
     @inject('IRegisterEventUseCase')
-    private _registerEventUseCase: IRegisterEventUseCase
+    private _registerEventUseCase: IRegisterEventUseCase,
+    @inject('IGetRegistrationDetails')
+    private _getRegistrationDetails: IGetRegistrationDetails,
+    @inject('IUpdateRegistrationStatusUseCase')
+    private _updateRegistrationStatusUseCase: IUpdateRegistrationStatusUseCase
   ) {}
 
   createEvent = async (req: Request, res: Response) => {
@@ -117,5 +123,50 @@ export class EventController {
       HTTP_STATUS.CREATED,
       SUCCESS_MESSAGES.REGISTRATION_SUCCESSFUL
     );
+  };
+
+  getRegistrationDetails = async (req: Request, res: Response) => {
+    const registration_id = req.params['registration_id'];
+    if (!registration_id)
+      throw new AppError(
+        ERROR_MESSAGES.CLIENT.INVALID_PARAMS,
+        HTTP_STATUS.BAD_REQUEST
+      );
+
+    const registration =
+      await this._getRegistrationDetails.execute(registration_id);
+
+    handleSuccessResponse(
+      res,
+      HTTP_STATUS.OK,
+      SUCCESS_MESSAGES.DATA_FETCHING_SUCCESS,
+
+      registration
+    );
+  };
+
+  updateRegistrationStatus = async (req: Request, res: Response) => {
+    const { registration_id } = req.params;
+
+    const type = String(req.query.type) as 'food_coupon' | 'entry_ticket';
+    const food_field = String(req.query.food_field) as
+      | 'morning'
+      | 'noon'
+      | 'evening';
+
+    if (!type || !registration_id) {
+      throw new AppError(
+        ERROR_MESSAGES.CLIENT.INVALID_PARAMS,
+        HTTP_STATUS.BAD_REQUEST
+      );
+    }
+
+    await this._updateRegistrationStatusUseCase.execute({
+      registration_id,
+      type,
+      food_field
+    });
+
+    handleSuccessResponse(res, HTTP_STATUS.OK, SUCCESS_MESSAGES.UPDATE_SUCCESS);
   };
 }

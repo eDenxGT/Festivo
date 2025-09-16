@@ -44,6 +44,14 @@ export class PrivateRoutes extends BaseRoute {
       .route('/events/registrations')
       .post(verifyAuth, asyncHandler(eventController.registerEvent));
 
+    this.router
+      .route('/events/registrations/:registration_id')
+      .get(verifyAuth, asyncHandler(eventController.getRegistrationDetails))
+      .patch(
+        verifyAuth,
+        asyncHandler(eventController.updateRegistrationStatus)
+      );
+
     //* ─────────────────────────────────────────────────────────────
     //*                🛠️ Token Refreshing Endpoint
     //* ─────────────────────────────────────────────────────────────

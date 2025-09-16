@@ -24,6 +24,10 @@ import { IGetAllEventsForUserUseCase } from '../../domain/usecaseInterfaces/even
 import { GetAllEventsForUserUseCase } from '../../application/usecases/event/get-all-events-for-user.usecase';
 import { IRegisterEventUseCase } from '../../domain/usecaseInterfaces/event/register-event-usecase.interface';
 import { RegisterEventUseCase } from '../../application/usecases/event/register-event.usecase';
+import { IGetRegistrationDetails } from '../../domain/usecaseInterfaces/event/get-registration-details-usecase.interface';
+import { GetRegistrationDetails } from '../../application/usecases/event/get-registration-details.usecase';
+import { UpdateRegistrationStatusUseCase } from '../../application/usecases/event/update-registration-status.usecase';
+import { IUpdateRegistrationStatusUseCase } from '../../domain/usecaseInterfaces/event/update-registration-status-usecase.interface';
 
 export class UseCaseRegistry {
   static registerUseCases(): void {
@@ -69,5 +73,14 @@ export class UseCaseRegistry {
     container.register<IRegisterEventUseCase>('IRegisterEventUseCase', {
       useClass: RegisterEventUseCase
     });
+    container.register<IGetRegistrationDetails>('IGetRegistrationDetails', {
+      useClass: GetRegistrationDetails
+    });
+    container.register<IUpdateRegistrationStatusUseCase>(
+      'IUpdateRegistrationStatusUseCase',
+      {
+        useClass: UpdateRegistrationStatusUseCase
+      }
+    );
   }
 }

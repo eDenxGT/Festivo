@@ -10,6 +10,8 @@ import NotFoundPage from "@/pages/common/NotFound";
 import OrganizerCreateEventPage from "@/pages/organizer/OrganizerCreateEventPage";
 import { OrganizerMyEventsPage } from "@/pages/organizer/OrganizerMyEventsPage";
 import OrganizerEditEventPage from "@/pages/organizer/OrganizerEditEventPage";
+import OrganizerQrScannerPage from "@/pages/organizer/OrganizerQrScannerPage";
+import OrganizerRegistrationDetailsPage from "@/pages/organizer/OrganizerRegistrationDetailsPage";
 
 const OrganizerRoutes = () => {
 	return (
@@ -40,6 +42,14 @@ const OrganizerRoutes = () => {
 				<Route
 					path="/edit-event/:event_id"
 					element={<OrganizerEditEventPage />}
+				/>
+				<Route
+					path="/qr-scanner"
+					element={<OrganizerQrScannerPage />}
+				/>
+				<Route
+					path="/registrations/:registration_id"
+					element={<OrganizerRegistrationDetailsPage />}
 				/>
 				<Route path="/my-events" element={<OrganizerMyEventsPage />} />
 			</Route>

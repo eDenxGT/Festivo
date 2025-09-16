@@ -20,7 +20,6 @@ function App() {
 				<Route path="/user/*" element={<UserRoutes />} />
 
 				<Route path="/org/*" element={<OrganizerRoutes />} />
-
 				<Route path="/unauthorized" element={<UnauthorizedPage />} />
 				<Route path="*" element={<NotFoundPage />} />
 			</Routes>

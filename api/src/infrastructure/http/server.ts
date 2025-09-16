@@ -1,5 +1,5 @@
 //* ====== Module Imports ====== *//
-import express, { Application } from 'express';
+import express, { Application, urlencoded } from 'express';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
@@ -36,6 +36,7 @@ export class ExpressServer {
   //* ====== Middlewares Configurations ====== *//
   private configureMiddlewares(): void {
     this._app.use(express.json());
+    this._app.use(urlencoded({ extended: true }));
 
     this._app.use(morgan(envConfig.loggerStatus));
 

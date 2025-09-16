@@ -73,11 +73,29 @@ export default function SignInForm({ onSubmit, role }: ISignInPageProps) {
 						</CardHeader>
 
 						<CardContent className="space-y-6">
+							<div className="p-3 rounded-lg bg-muted/30 border border-border/50 text-sm text-muted-foreground">
+								<p>
+									<span className="font-medium text-foreground">
+										Test Email:
+									</span>{" "}
+									{role === "organizer"
+										? "john@gmail.com"
+										: "aadilmk10@gmail.com"}
+								</p>
+								<p>
+									<span className="font-medium text-foreground">
+										Password:
+									</span>{" "}
+									123456
+								</p>
+							</div>
+
 							<form
 								onSubmit={formik.handleSubmit}
 								className="space-y-4">
 								{/* Email Field */}
 								<div className="space-y-2">
+									<div></div>
 									<Label
 										htmlFor="email"
 										className="text-sm font-medium">

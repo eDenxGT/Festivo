@@ -10,15 +10,13 @@ export const UserAllEventsPage = () => {
 
 	const { successToast, errorToast } = useToaster();
 	const { data } = useGetAllEventsQuery({ search: debouncedSearch });
-	const { mutate } = useRegisterEventMutation();
+	const { mutate, isPending: isRegistering } = useRegisterEventMutation();
 
 	const handleEventRegister = async (event_id: string) => {
 		mutate(event_id, {
 			onSuccess: (data) => successToast(data.message),
 			onError: (error: any) => {
-				errorToast(
-					error.response?.data?.message || "Already Registered"
-				);
+				errorToast(error.response?.data?.message);
 			},
 		});
 	};
@@ -28,6 +26,7 @@ export const UserAllEventsPage = () => {
 			handleEventRegister={handleEventRegister}
 			setDebouncedSearch={setDebouncedSearch}
 			events={data?.data!}
+			isRegistering={isRegistering}
 		/>
 	);
 };

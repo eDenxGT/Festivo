@@ -42,7 +42,12 @@ const JudgesInvitationForm = ({
 				<div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
 					<span className="text-sm font-bold text-primary">5</span>
 				</div>
-				<h3 className="text-lg font-semibold">Judges Invitations</h3>
+				<h3 className="text-lg font-semibold">Judges Invitations </h3>
+				<p className="text-muted-foreground text-xs">
+					{disabled
+						? "(This value cannot be modified)"
+						: "(You cant modify this value later)"}
+				</p>
 			</div>
 
 			{/* Add Judge Name + Email */}

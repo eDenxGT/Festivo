@@ -24,6 +24,7 @@ const TicketDetailsForm = ({
 				<Checkbox
 					id="is_paid"
 					checked={formik.values.is_paid}
+					disabled
 					onCheckedChange={(checked) =>
 						formik.setFieldValue("is_paid", checked)
 					}
@@ -33,6 +34,9 @@ const TicketDetailsForm = ({
 					className="text-sm font-medium cursor-pointer">
 					<DollarSign className="inline h-4 w-4 mr-1" />
 					This is a paid event
+					<p className="text-muted-foreground text-xs">
+						{"(For now this is under development)"}
+					</p>
 				</Label>
 			</div>
 

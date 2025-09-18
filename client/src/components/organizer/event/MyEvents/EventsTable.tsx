@@ -15,7 +15,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { Edit, Eye } from "lucide-react";
+import { Edit, Eye, Loader2 } from "lucide-react";
 import { EventDetailsDialog } from "./EventDetailsDialog";
 import type { IEvent } from "@/types/EventTypes";
 import { formatDate } from "@/utils/helpers/date.formatter";
@@ -26,10 +26,12 @@ const EventsTable = ({
 	events,
 	handleAction,
 	isForOrganizer = true,
+	isRegistering,
 }: {
 	events: IEvent[];
 	handleAction: (event_id: string) => void;
 	isForOrganizer?: boolean;
+	isRegistering?: boolean;
 }) => {
 	const navigate = useNavigate();
 	return (
@@ -150,13 +152,27 @@ const EventsTable = ({
 											</DialogHeader>
 											<div className="flex justify-end gap-2 mt-4">
 												<Button
+													className={`${
+														isRegistering &&
+														"bg-gray-300"
+													}`}
+													disabled={isRegistering}
 													onClick={() => {
 														handleAction(event.id);
 														navigate(
 															"/user/events"
 														);
 													}}>
-													Confirm
+													{isRegistering ? (
+														<Loader2
+															className={`${
+																isRegistering &&
+																"animate-spin"
+															}`}
+														/>
+													) : (
+														"Confirm"
+													)}
 												</Button>
 											</div>
 										</DialogContent>

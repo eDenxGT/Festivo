@@ -43,6 +43,11 @@ const GuestInvitationForm = ({
 					<span className="text-sm font-bold text-primary">4</span>
 				</div>
 				<h3 className="text-lg font-semibold">Guest Invitations</h3>
+				<p className="text-muted-foreground text-xs">
+					{disabled
+						? "(This value cannot be modified)"
+						: "(You cant modify this value later)"}
+				</p>
 			</div>
 
 			{/* Add Guest Name + Email */}

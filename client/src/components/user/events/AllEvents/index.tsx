@@ -9,10 +9,12 @@ const AllEvents = ({
 	events,
 	setDebouncedSearch,
 	handleEventRegister,
+	isRegistering,
 }: {
 	setDebouncedSearch: (search: string) => void;
 	events: IEvent[];
 	handleEventRegister: (event_id: string) => void;
+	isRegistering?: boolean;
 }) => {
 	const [search, setSearch] = useState("");
 
@@ -67,6 +69,7 @@ const AllEvents = ({
 									events={events}
 									handleAction={handleEventRegister}
 									isForOrganizer={false}
+									isRegistering={isRegistering}
 								/>
 							</div>
 						)}

@@ -8,7 +8,7 @@ export function useToaster() {
 		});
 
 	const errorToast = (message: string) =>
-		toast.error(message, {
+		toast.error(message || "Something went wrong!", {
 			position: "top-right",
 			duration: 3000,
 		});

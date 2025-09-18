@@ -1,5 +1,5 @@
 import SignInForm from "@/components/auth/SignInForm";
-import { useLoginMutation } from "@/hooks/auth/useLogin";
+import { useLoginMutation } from "@/hooks/auth/mutations/useLogin";
 import { useToaster } from "@/hooks/ui/useToaster";
 import { userLogin } from "@/store/slices/user.slice";
 import { useAppDispatch } from "@/store/store";

@@ -14,13 +14,13 @@ export const setAuthCookies = (
   res.cookie(accessTokenName, accessToken, {
     httpOnly: true,
     secure: isProduction,
-    sameSite: 'lax'
+    sameSite: 'strict'
   });
 
   res.cookie(refreshTokenName, refreshToken, {
     httpOnly: true,
     secure: isProduction,
-    sameSite: 'lax'
+    sameSite: 'strict'
   });
 };
 
@@ -32,7 +32,7 @@ export const updateCookieWithAccessToken = (
   res.cookie(accessTokenName, accessToken, {
     httpOnly: true,
     secure: isProduction,
-    sameSite: 'lax'
+    sameSite: 'strict'
   });
 };
 

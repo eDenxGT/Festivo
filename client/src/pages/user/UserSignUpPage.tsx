@@ -1,5 +1,5 @@
 import SignUpForm from "@/components/auth/SignUpForm";
-import { useRegisterMutation } from "@/hooks/auth/useRegister";
+import { useRegisterMutation } from "@/hooks/auth/mutations/useRegister";
 import { useToaster } from "@/hooks/ui/useToaster";
 import type { IRegisterData } from "@/types/UserTypes";
 

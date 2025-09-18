@@ -2,7 +2,7 @@ import { useAppDispatch, type RootState } from "@/store/store";
 import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
 import { useToaster } from "@/hooks/ui/useToaster";
-import { useLogout } from "@/hooks/auth/useLogout";
+import { useLogout } from "@/hooks/auth/mutations/useLogout";
 import { organizerLogout } from "@/store/slices/organizer.slice";
 import { logoutUser } from "@/services//auth.service";
 import { Header } from "../common/Header";

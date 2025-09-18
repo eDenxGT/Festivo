@@ -26,7 +26,8 @@ export default function LandingPage() {
 						</span>{" "}
 						Easily
 					</h1>
-					<p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto text-pretty">
+					<p
+						className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto text-pretty">
 						Festivo is the all-in-one platform for event management
 						and ticketing. From intimate gatherings to large
 						festivals, we make event planning effortless.

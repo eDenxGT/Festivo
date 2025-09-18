@@ -5,7 +5,7 @@ import { Header } from "../common/Header";
 import { userLogout } from "@/store/slices/user.slice";
 import { useToaster } from "@/hooks/ui/useToaster";
 import { logoutUser } from "@/services//auth.service";
-import { useLogout } from "@/hooks/auth/useLogout";
+import { useLogout } from "@/hooks/auth/mutations/useLogout";
 
 export const UserLayout = () => {
 	const { successToast, errorToast } = useToaster();

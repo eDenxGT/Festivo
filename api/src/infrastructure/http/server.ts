@@ -16,7 +16,6 @@ import { notFound } from '../../interface/middlewares/not-found';
 //* ====== Route Imports ====== *//
 import { AuthRoutes } from '../../interface/routes/auth.route';
 import { PrivateRoutes } from '../../interface/routes/private.route';
-import { setupSwagger } from '../../shared/swagger';
 import { errorHandler } from '../../interface/middlewares/error.middleware';
 
 //* ====== Express App ====== *//
@@ -56,11 +55,9 @@ export class ExpressServer {
     this._app.use(
       rateLimit({
         windowMs: 15 * 60 * 1000,
-        max: 1000
+        max: 100
       })
     );
-
-    setupSwagger(this._app);
 
     logger.log('Middlewares Configured');
   }
